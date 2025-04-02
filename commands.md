@@ -11,3 +11,8 @@ php artisan serve
 npm run dev 
 
 npm install -D tailwindcss
+
+php artisan make:model Post -a
+php artisan migrate
+php artisan route:list
+php artisan db:seed
