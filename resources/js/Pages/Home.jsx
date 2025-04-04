@@ -1,9 +1,12 @@
 import React from 'react'
 import Layout from '../Layouts/Layout'
 import { Link } from '@inertiajs/react'
+import { useRoute } from '../../../vendor/tightenco/ziggy';
+
 
 const Home = ({ posts }) => {
-  console.log(posts);
+  // console.log(posts);
+  const route = useRoute()
   return (
     <>
       <h1 className='title'>Home Page</h1>
@@ -20,6 +23,11 @@ const Home = ({ posts }) => {
             <p className='font-medium'>
               {post.body}
             </p>
+
+            {/* <Link href={`/posts/${post.id}`} className='text-link'>Read more...</Link> */}
+            <Link href={route('posts.show', post)}
+             className='text-link'>Read more...</Link>
+
           </div>
         ))}
       </div>
