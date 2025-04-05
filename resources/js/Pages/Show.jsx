@@ -1,6 +1,16 @@
-import React from 'react'
+import {useForm} from "@inertiajs/react";
+import {useRoute} from "vendor/tightenco/ziggy"
 
 const Show = ({post}) => {
+
+  const {delete: destroy } = useForm();
+  const route = useRoute();
+
+  function submit(e){
+    e.preventDefault()
+    // destroy(`/posts/${post.id}`)
+    destroy(route('posts.destroy', post));
+  }
   return (
     <>
         <h1 className="title">Post: {post.id}</h1>
@@ -12,9 +22,17 @@ const Show = ({post}) => {
             <p className='font-medium'>
               {post.body}
             </p>
+
+            <div className="flex items-center justify-end gap-2">
+              <form onSubmit={submit}>
+                <button className="bg-red-500 rounded-md test-sm px-4 py-1 text-white">
+                  Delete
+                </button>
+              </form>
+            </div>
         </div>
     </>
   )
-}
+} 
 
 export default Show

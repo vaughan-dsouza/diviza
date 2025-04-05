@@ -1,15 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Layout from '../Layouts/Layout'
-import { Link } from '@inertiajs/react'
-import { useRoute } from '../../../vendor/tightenco/ziggy';
+import { Link, usePage } from '@inertiajs/react'
+import { useRoute } from 'vendor/tightenco/ziggy';
 
 
 const Home = ({ posts }) => {
   // console.log(posts);
-  const route = useRoute()
+  const route = useRoute();
+  console.log(usePage());
+  const {flash} = usePage().props;
+  const [flashMsg, setFlashMsg]  = useState(flash.message);
+
+  setTimeout(()=>{
+    setFlashMsg(null);
+  },2000);
+
   return (
     <>
       <h1 className='title'>Home Page</h1>
+      { flashMsg && <div className='absolute top-24 right-6 bg-rose-500 p-2 rounded-md shadow-lg text-sm text-white'>{flashMsg}</div>}
       {/* <Link preserveScroll href='/' className='block title mt-[1000px]'>
         {new Date().toLocaleTimeString()}
       </Link> */}

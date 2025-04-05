@@ -31,7 +31,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        sleep(5);
+        // sleep(5);
         $fields = $request->validate([
             'body' => ['required']
         ]);
@@ -69,6 +69,9 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return redirect('/')->with(
+            'message' , 'The post was deleted'
+        );
     }
 }
