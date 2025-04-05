@@ -1,20 +1,24 @@
-import {Head, useForm} from '@inertiajs/react';
+import {useForm, Head} from '@inertiajs/react';
+import {useRoute} from "vendor/tightenco/ziggy"
 
-const Create = () => {
-    const {data, setData, post, errors, processing } = useForm({
-        body: "",
+const Edit = ({post}) => {
+    const {data, setData, put, errors, processing } = useForm({
+        body: post.body,
     });
-    console.log(errors);
+    const route = useRoute();
+    // console.log(errors);
 
     function submit(e){
         e.preventDefault()
-        post('/posts')
+        // put(`/posts/${post.id}`);
+        put(route('posts.update', post));
+
     }
   return (
     <>
-    <Head title="Create" />
+    <Head title="Edit" />
 
-    <h1 className='title' >Create</h1>
+    <h1 className='title' >Edit</h1>
 
     <div className="w-1/2 mx-auto">
         <form onSubmit={submit}>
@@ -28,11 +32,11 @@ const Create = () => {
             </textarea>
 
             {errors.body && <p className="error">{errors.body}</p>}
-            <button className="primary-btn mt-4" disabled={processing}>Create post</button>
+            <button className="primary-btn mt-4" disabled={processing}>Edit post</button>
         </form>
     </div>
     </>
   )
 }
 
-export default Create
+export default Edit
