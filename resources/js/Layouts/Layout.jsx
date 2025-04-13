@@ -4,24 +4,6 @@ import axios from 'axios';
 
 
 const Layout = ({children}) => {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-    useEffect(() => {
-        const checkAuth = async () => {
-          try {
-            const res = await axios.get('/api/user');
-            console.log(res);
-            if (res?.data) {
-              setIsAuthenticated(true);
-            }
-          } catch (err) {
-            router.visit('/login'); 
-          } finally {
-          }
-        };
-    
-        checkAuth();
-      }, []);
-
   return (
     <>
         <header>
