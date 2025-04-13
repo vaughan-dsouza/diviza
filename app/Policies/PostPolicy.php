@@ -63,4 +63,11 @@ class PostPolicy
     {
         return false;
     }
+
+    public function modify(User $user, Post $post)
+    {
+        return $user->id === $post->user_id
+            ? Response::allow()
+            : Response::deny("you don't own this post");
+    }
 }
